@@ -9,7 +9,15 @@ Wichtig 2: Bitte nur die Funktionen ausprogrammieren und keine Funktionsaufrufe 
 ### Beispiel 1:
 
 function greatest(x::Vector{T}, k::Integer = 1) :: Vector{T} where {T <: Real}
-    # Fuege hier deinen Loesungscode ein
+    if k > length(x) || k <= 0 
+        throw(DomainError(k, "k muss größer als null und kleiner, als der Vektor, aus dem die größten Werte gesucht werden, sein."))
+    end
+    z = Int64(k)
+    for i in 1:k
+        z[i] = max(t)
+
+        
+
     return
 end
 
