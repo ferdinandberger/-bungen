@@ -35,10 +35,10 @@ function nearestindex(x::Vector{<:Real}, y::Real) :: Int
         end
     end
     temp = (1:length(z))[z .== minimum(z)]
-    le = 1:length(temp)
-    res = Random.sample(le, 1)
-    return (temp[res])
+    res = StatsBase.sample(temp, 1)
+    return (res)
 end
+
 
 ### Beispiel 3
 
