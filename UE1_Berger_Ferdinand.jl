@@ -5,30 +5,40 @@ Wichtig 1: Die Datei gemaess der Namensrichtlinien benennen.
 Wichtig 2: Bitte nur die Funktionen ausprogrammieren und keine Funktionsaufrufe vornehmen.
 =#
 
-
 ### Beispiel 1:
 
 function greatest(x::Vector{T}, k::Integer = 1) :: Vector{T} where {T <: Real}
     if k > length(x) || k <= 0 
         throw(DomainError(k, "k muss größer als null und kleiner, als der Vektor, aus dem die größten Werte gesucht werden, sein."))
     end
-    z = Int64(k)
+    z = zeros(k)
+    t = copy(x)
+    bool = falses(length(x))
     for i in 1:k
-        z[i] = max(t)
-
-        
-
-    return
+        z[i] = maximum(t)
+        t = t[t .!= z[i]]
+    end
+    for j in 1:length(x)
+        bool[j] = x[j] in z
+    end
+    res = x[bool]
+    return(res)
 end
 
 
 ### Beispiel 2
-
 function nearestindex(x::Vector{<:Real}, y::Real) :: Int
-    # Fuege hier deinen Loesungscode ein
-    return
+    z = x .- y 
+    for i in 1:length(z)
+        if z[i] < 0
+            z[i] = z[i] * (-1)
+        end
+    end
+    temp = (1:length(z))[z .== minimum(z)]
+    le = 1:length(temp)
+    res = Random.sample(le, 1)
+    return (temp[res])
 end
-
 
 ### Beispiel 3
 
