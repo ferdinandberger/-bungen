@@ -43,12 +43,28 @@ end
 ### Beispiel 3
 
 function swap!(x::Vector, i::Integer, j::Integer) :: Nothing
-    # Fuege hier deinen Loesungscode ein
+    res = x[i]
+    x[i] = x[j]
+    x[j] = res 
     return
 end
 
+
+
 function bubblesort!(x::Vector{<:Real}; rev::Bool = false) :: Nothing
-    # Fuege hier deinen Loesungscode ein
+    if rev == true 
+        x = x * (-1)
+    end
+    for i in 1:(length(x)-1)
+        for j in 1:(length(x)-i)
+            if x[j] > x[j+1] 
+                swap!(x, j, (j+1))
+            end 
+        end 
+    end 
+    if rev == true 
+        x = x*(-1)
+    end 
     return
 end
 
@@ -56,15 +72,37 @@ end
 ### Beispiel 4
 
 function canonicaltour(x::Vector{T}) :: Vector{T} where {T <: Integer}
-    # Fuege hier deinen Loesungscode ein
-    return
+    if sort(x) != (1:length(x))
+        throw(DomainError(x, "x ist keine Permutation der natürlichen Zahlen 1 bis length(x)"))
+    end
+    tour = [1]
+    ind1 = (1:length(x))[x .== 1][1]
+    if ind1 != 1
+        L = ind1 - 1
+        R = ind1 + 1
+        temp = x[R:length(x)]
+        append!(temp,x[1:L])
+        if temp[1] > temp[end]
+            append!(tour, reverse(temp))
+        else 
+            append!(tour, temp)
+        end
+    else 
+        if x[2] > x[end]
+            append!(tour, reverse(x[2:length(x)]))
+        else 
+            tour = x 
+        end 
+    end 
+    return(tour)
 end
+
 
 
 ### Beispiel 5
 
 function distance(x::Vector{<:Real}, y::Vector{<:Real}; p::Real = 2)
-    # Fuege hier deinen Loesungscode ein
+    
     return
 end
 
