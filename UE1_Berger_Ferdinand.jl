@@ -27,6 +27,7 @@ end
 
 
 ### Beispiel 2
+
 function nearestindex(x::Vector{<:Real}, y::Real) :: Int
     z = x .- y 
     for i in 1:length(z)
@@ -102,7 +103,13 @@ end
 ### Beispiel 5
 
 function distance(x::Vector{<:Real}, y::Vector{<:Real}; p::Real = 2)
-    
-    return
+    if length(x) != length(y)
+        throw(ArgumentError("x und y müssen gleich lang sein."))
+    end
+    if p <= 0 
+        throw(ArgumentError("p muss größer als 0 sein."))
+    end 
+    pDist = (sum((abs.(x-y)).^p))^(1/p)
+    return(pDist)
 end
 
